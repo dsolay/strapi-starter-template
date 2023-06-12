@@ -62,24 +62,6 @@
       "target": "plugin::users-permissions.role",
       "inversedBy": "users",
       "configurable": false
-    },
-    "driver": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::driver.driver",
-      "mappedBy": "user"
-    },
-    "customer": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::customer.customer",
-      "mappedBy": "user"
-    },
-    "orderComments": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::order-comment.order-comment",
-      "mappedBy": "user"
     }
   }
 }
