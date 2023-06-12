@@ -18,6 +18,8 @@ Commands:
   exit 1
 }
 
+APP_NAME=app
+
 dump() {
   pg_dump \
     --host "$DB_HOST" \
@@ -25,7 +27,7 @@ dump() {
     --port "$DB_PORT" \
     --format=c \
     "$DB_DATABASE" \
-    > moviapp-db-full_"$1"_"$(date +%F)".pgsql
+    > "$APP_NAME"-db-full_"$1"_"$(date +%F)".pgsql
 }
 
 dump-data() {
@@ -36,7 +38,7 @@ dump-data() {
     --format=c \
     --data-only \
     "$DB_DATABASE" \
-    > moviapp-db-data_"$1"_"$(date +%F)".pgsql
+    > "$APP_NAME"-db-data_"$1"_"$(date +%F)".pgsql
 }
 
 
@@ -48,7 +50,7 @@ dump-schema() {
     --format=c \
     --schema-only \
     "$DB_DATABASE" \
-    > moviapp-db-schema_"$1"_"$(date +%F)".pgsql
+    > "$APP_NAME"-db-schema_"$1"_"$(date +%F)".pgsql
 }
 
 restore() {
@@ -63,13 +65,16 @@ restore() {
 
 case "$2" in
   dev)
-    set -o allexport; source .env.moviapp-db.dev; set +o allexport
+    # shellcheck source=/dev/null
+    set -o allexport; source .env."$APP_NAME"-db.dev; set +o allexport
     ;;
   staging)
-    set -o allexport; source .env.moviapp-db.staging; set +o allexport
+    # shellcheck source=/dev/null
+    set -o allexport; source .env."$APP_NAME"-db.staging; set +o allexport
     ;;
   local)
-    set -o allexport; source .env.moviapp-db.local; set +o allexport
+    # shellcheck source=/dev/null
+    set -o allexport; source .env."$APP_NAME"-db.local; set +o allexport
     ;;
   *)
     echo "enviroment dosen't exists"

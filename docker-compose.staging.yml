@@ -2,10 +2,10 @@ version: "3.8"
 
 networks:
   net:
-    name: moviapp_net
+    name: app_net
 
 volumes:
-  moviapp_db:
+  app_db:
       driver: local
 
 services:
@@ -19,7 +19,7 @@ services:
       - SPACES_ENDPOINT=${SPACES_ENDPOINT}
       - SPACES_REGION=${SPACES_REGION}
     volumes:
-      - moviapp_db:/var/lib/postgresql/data
+      - app_db:/var/lib/postgresql/data
       - ./docker/postgres/init-db.sh:/docker-entrypoint-initdb.d/init-db.sh
     ports:
       - "5432:5432"
@@ -29,7 +29,7 @@ services:
   api:
     restart: always
     image: ${TAG}
-    container_name: subastas_api
+    container_name: app_api
     networks:
       - net
     environment:

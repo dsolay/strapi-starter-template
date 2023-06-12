@@ -2,7 +2,7 @@
 set -e
 
 psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "$POSTGRES_DB" <<-EOSQL
-	CREATE USER moviapp;
-	CREATE DATABASE moviapp;
-	GRANT ALL PRIVILEGES ON DATABASE moviapp TO moviapp;
+	CREATE USER db_user;
+	CREATE DATABASE db_name;
+	GRANT ALL PRIVILEGES ON DATABASE db_name TO db_user;
 EOSQL

@@ -1,10 +1,10 @@
 {
-  "name": "moviapp-api",
+  "name": "app-api",
   "build": {
     "context": ".",
     "dockerfile": "Dockerfile"
   },
-  "runArgs": ["--name=moviapp-api"],
+  "runArgs": ["--name=app-api"],
   "forwardPorts": [7080],
   "remoteUser": "node",
   "workspaceMount": "source=${localWorkspaceFolder},target=/home/node/workspace,type=bind,consistency=cached",
