@@ -1,0 +1,111 @@
+components:
+  schemas:
+    Order:
+      type: 'object'
+      properties:
+        international:
+          type: 'boolean'
+          default: false
+        loadingLocation:
+          type: 'object'
+        dischargeLocation:
+          type: 'object'
+        price:
+          type: 'number'
+          format: 'double'
+        schedule:
+          type: 'string'
+          format: 'date-time'
+        comment:
+          type: 'string'
+        status:
+          type: 'string'
+          oneOff:
+            - const: 'pending'
+            - const: 'pre-assigned'
+            - const: 'assigned'
+            - const: 'in-route-to-client'
+            - const: 'loading'
+            - const: 'in-route'
+            - const: 'downloading'
+            - const: 'completed'
+          default: 'pending'
+        travelDays: {}
+        oneWayKilometers: {}
+        driver:
+          oneOf: &ref_0
+            - type: 'integer'
+            - type: 'object'
+        customer:
+          oneOf: *ref_0
+        benefits:
+          type: 'array'
+          items:
+            oneOf:
+              - type: 'integer'
+              - type: 'object'
+        truckType:
+          oneOf: *ref_0
+        truckSize:
+          oneOf: *ref_0
+        stopOffs:
+          type: 'array'
+          items: &ref_1
+            oneOf:
+              - type: 'integer'
+              - type: 'object'
+        driverRequests:
+          type: 'array'
+          items: *ref_1
+      required:
+        - 'loadingLocation'
+        - 'dischargeLocation'
+        - 'price'
+        - 'schedule'
+        - 'travelDays'
+        - 'oneWayKilometers'
+    FormattedModel:
+      allOf:
+        - type: 'object'
+          properties:
+            id:
+              type: 'number'
+        - $ref: '#/components/schemas/Order'
+        - $ref: '../common.yaml#/components/schemas/CommonFields'
+  requestBodies:
+    order:
+      description: 'order request body'
+      required: true
+      content:
+        application/json:
+          schema:
+            type: 'object'
+            properties:
+              data:
+                $ref: '#/components/schemas/Order'
+  responses:
+    success:
+      description: 'List all order'
+      content:
+        application/json:
+          schema:
+            type: 'object'
+            properties:
+              data:
+                type: 'array'
+                items:
+                  type: 'object'
+                  $ref: '#/components/schemas/FormattedModel'
+              meta:
+                type: 'object'
+                $ref: '../common.yaml#/components/schemas/Pagination'
+    created:
+      description: 'New order created'
+      content:
+        application/json:
+          schema:
+            type: 'object'
+            properties:
+              data:
+                type: 'object'
+                $ref: '#/components/schemas/FormattedModel'

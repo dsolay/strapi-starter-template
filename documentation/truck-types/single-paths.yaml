@@ -1,0 +1,58 @@
+get:
+  description: 'Retrieve single truck-type'
+  summary: 'Show single truck-type'
+  operationId: 'showTruck-type'
+  tags:
+    - 'Truck-types'
+  parameters:
+    - $ref: '../common.yaml#/components/parameters/recordId'
+    - $ref: '../common.yaml#/components/parameters/filterParam'
+    - $ref: '../common.yaml#/components/parameters/sortParam'
+    - $ref: '../common.yaml#/components/parameters/paginationParam'
+    - $ref: '../common.yaml#/components/parameters/fieldParam'
+    - $ref: '../common.yaml#/components/parameters/populateParam'
+  responses:
+    '200':
+      $ref: './components.yaml#/components/responses/success'
+    '401':
+      $ref: '../common.yaml#/components/responses/unauthorized'
+    '403':
+      $ref: '../common.yaml#/components/responses/forbidden'
+    default:
+      $ref: '../common.yaml#/components/responses/internalError'
+put:
+  description: 'Update existing truck-type'
+  summary: 'Update truck-type'
+  operationId: 'updateTruck-type'
+  tags:
+    - 'Truck-types'
+  parameters:
+    - $ref: '../common.yaml#/components/parameters/recordId'
+  requestBody:
+    $ref: './components.yaml#/components/requestBodies/truck-type'
+  responses:
+    '200':
+      $ref: './components.yaml#/components/responses/created'
+    '401':
+      $ref: '../common.yaml#/components/responses/unauthorized'
+    '403':
+      $ref: '../common.yaml#/components/responses/forbidden'
+    default:
+      $ref: '../common.yaml#/components/responses/internalError'
+delete:
+  description: 'Delete existing truck-type'
+  summary: 'Delete truck-type'
+  operationId: 'deleteTruck-type'
+  tags:
+    - 'Truck-types'
+  parameters:
+    - $ref: '../common.yaml#/components/parameters/recordId'
+  responses:
+    '200':
+      $ref: './components.yaml#/components/responses/created'
+    '401':
+      $ref: '../common.yaml#/components/responses/unauthorized'
+    '403':
+      $ref: '../common.yaml#/components/responses/forbidden'
+    default:
+      $ref: '../common.yaml#/components/responses/internalError'

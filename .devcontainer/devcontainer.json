@@ -1,0 +1,31 @@
+{
+  "name": "moviapp-api",
+  "build": {
+    "context": ".",
+    "dockerfile": "Dockerfile"
+  },
+  "runArgs": ["--name=moviapp-api"],
+  "forwardPorts": [7080],
+  "remoteUser": "node",
+  "workspaceMount": "source=${localWorkspaceFolder},target=/home/node/workspace,type=bind,consistency=cached",
+  "workspaceFolder": "/home/node/workspace",
+  "mounts": [
+    "source=node_modules,target=${containerWorkspaceFolder}/node_modules,type=volume",
+    "source=extensions,target=/home/node/.vscode-server/extensions,type=volume"
+  ],
+  "postCreateCommand": "sudo chown node node_modules && yarn install",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "visualstudioexptteam.vscodeintellicode",
+        "foxundermoon.shell-format",
+        "redhat.vscode-yaml",
+        "mikestead.dotenv",
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "stoplight.spectral",
+        "shardulm94.trailing-spaces"
+      ]
+    }
+  }
+}

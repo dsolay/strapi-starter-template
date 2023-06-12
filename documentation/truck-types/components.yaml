@@ -1,0 +1,62 @@
+components:
+  schemas:
+    Truck-type:
+      type: 'object'
+      properties:
+        type:
+          type: 'string'
+        description:
+          type: 'string'
+        trucks:
+          type: 'array'
+          items:
+            oneOf:
+              - type: 'integer'
+              - type: 'object'
+      required:
+        - 'type'
+    FormattedModel:
+      allOf:
+        - type: 'object'
+          properties:
+            id:
+              type: 'number'
+        - $ref: '#/components/schemas/Truck-type'
+        - $ref: '../common.yaml#/components/schemas/CommonFields'
+  requestBodies:
+    truck-type:
+      description: 'truck-type request body'
+      required: true
+      content:
+        application/json:
+          schema:
+            type: 'object'
+            properties:
+              data:
+                $ref: '#/components/schemas/Truck-type'
+  responses:
+    success:
+      description: 'List all truck-type'
+      content:
+        application/json:
+          schema:
+            type: 'object'
+            properties:
+              data:
+                type: 'array'
+                items:
+                  type: 'object'
+                  $ref: '#/components/schemas/FormattedModel'
+              meta:
+                type: 'object'
+                $ref: '../common.yaml#/components/schemas/Pagination'
+    created:
+      description: 'New truck-type created'
+      content:
+        application/json:
+          schema:
+            type: 'object'
+            properties:
+              data:
+                type: 'object'
+                $ref: '#/components/schemas/FormattedModel'

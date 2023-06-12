@@ -1,0 +1,53 @@
+components:
+  schemas:
+    {{ model | capitalize }}:
+      type: object
+      properties:
+
+    FormattedModel:
+      allOf:
+        - type: object
+          properties:
+            id:
+              type: number
+        - $ref: "#/components/schemas/{{ model | capitalize }}"
+        - $ref: "../common.yaml#/components/schemas/CommonFields"
+
+  requestBodies:
+    {{ model }}:
+      description: '{{ model }} request body'
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                $ref: "#/components/schemas/{{ model | capitalize }}"
+  responses:
+    success:
+      description: 'List all {{ model }}'
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  type: object
+                  $ref: "#/components/schemas/FormattedModel"
+              meta:
+                type: object
+                $ref: "../common.yaml#/components/schemas/Pagination"
+
+    created:
+      description: 'New {{ model }} created'
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                $ref: "#/components/schemas/FormattedModel"

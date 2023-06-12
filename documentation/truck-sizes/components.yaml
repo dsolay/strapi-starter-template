@@ -1,0 +1,65 @@
+components:
+  schemas:
+    Truck-size:
+      type: 'object'
+      properties:
+        size:
+          type: 'integer'
+        unit:
+          type: 'string'
+        derscription:
+          type: 'string'
+        trucks:
+          type: 'array'
+          items:
+            oneOf:
+              - type: 'integer'
+              - type: 'object'
+      required:
+        - 'size'
+        - 'unit'
+    FormattedModel:
+      allOf:
+        - type: 'object'
+          properties:
+            id:
+              type: 'number'
+        - $ref: '#/components/schemas/Truck-size'
+        - $ref: '../common.yaml#/components/schemas/CommonFields'
+  requestBodies:
+    truck-size:
+      description: 'truck-size request body'
+      required: true
+      content:
+        application/json:
+          schema:
+            type: 'object'
+            properties:
+              data:
+                $ref: '#/components/schemas/Truck-size'
+  responses:
+    success:
+      description: 'List all truck-size'
+      content:
+        application/json:
+          schema:
+            type: 'object'
+            properties:
+              data:
+                type: 'array'
+                items:
+                  type: 'object'
+                  $ref: '#/components/schemas/FormattedModel'
+              meta:
+                type: 'object'
+                $ref: '../common.yaml#/components/schemas/Pagination'
+    created:
+      description: 'New truck-size created'
+      content:
+        application/json:
+          schema:
+            type: 'object'
+            properties:
+              data:
+                type: 'object'
+                $ref: '#/components/schemas/FormattedModel'

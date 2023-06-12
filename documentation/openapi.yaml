@@ -1,0 +1,110 @@
+openapi: '3.1.0'
+info:
+  title: 'API Name'
+  description: 'API Description'
+  contact:
+    name: 'API Support'
+    url: 'https://www.example.com/support'
+    email: 'support@example.com'
+  version: '1.0.0'
+servers:
+  - url: 'https://api.domain.xyz/api'
+    description: 'Production server'
+  - url: 'https://api.domain.xyz/api'
+    description: 'Sandbox server'
+  - url: 'http://localhost:1337/api'
+    description: 'Local server'
+components:
+  securitySchemes:
+    BearerAuth:
+      type: 'http'
+      scheme: 'bearer'
+      bearerFormat: 'JWT'
+security:
+  - BearerAuth: []
+paths:
+  /benefits:
+    $ref: './benefits/paths.yaml'
+  /benefits/{id}:
+    $ref: './benefits/single-paths.yaml'
+  /common-rejected-reasons:
+    $ref: './common-rejected-reasons/paths.yaml'
+  /common-rejected-reasons/{id}:
+    $ref: './common-rejected-reasons/single-paths.yaml'
+  /customers:
+    $ref: './customers/paths.yaml'
+  /customers/{id}:
+    $ref: './customers/single-paths.yaml'
+  /customer-addresses:
+    $ref: './customer-addresses/paths.yaml'
+  /customer-addresses/{id}:
+    $ref: './customer-addresses/single-paths.yaml'
+  /drivers:
+    $ref: './drivers/paths.yaml'
+  /drivers/{id}:
+    $ref: './drivers/single-paths.yaml'
+  /driver-requests:
+    $ref: './driver-requests/paths.yaml'
+  /driver-requests/{id}:
+    $ref: './driver-requests/single-paths.yaml'
+  /driver-schedules:
+    $ref: './driver-schedules/paths.yaml'
+  /driver-schedules/{id}:
+    $ref: './driver-schedules/single-paths.yaml'
+  /orders:
+    $ref: './orders/paths.yaml'
+  /orders/{id}:
+    $ref: './orders/single-paths.yaml'
+  /stop-offs:
+    $ref: './stop-offs/paths.yaml'
+  /stop-offs/{id}:
+    $ref: './stop-offs/single-paths.yaml'
+  /trucks:
+    $ref: './trucks/paths.yaml'
+  /trucks/{id}:
+    $ref: './trucks/single-paths.yaml'
+  /truck-models:
+    $ref: './truck-models/paths.yaml'
+  /truck-models/{id}:
+    $ref: './truck-models/single-paths.yaml'
+  /truck-sizes:
+    $ref: './truck-sizes/paths.yaml'
+  /truck-sizes/{id}:
+    $ref: './truck-sizes/single-paths.yaml'
+  /truck-templates:
+    $ref: './truck-templates/paths.yaml'
+  /truck-templates/{id}:
+    $ref: './truck-templates/single-paths.yaml'
+  /truck-types:
+    $ref: './truck-types/paths.yaml'
+  /truck-types/{id}:
+    $ref: './truck-types/single-paths.yaml'
+tags:
+  - name: 'Benefits'
+    description: 'Describe benefit endpoints'
+  - name: 'Common-rejected-reasons'
+    description: 'Describe common-rejected-reason endpoints'
+  - name: 'Customers'
+    description: 'Describe customer endpoints'
+  - name: 'Customer-addresses'
+    description: 'Describe customer-address endpoints'
+  - name: 'Drivers'
+    description: 'Describe driver endpoints'
+  - name: 'Driver-requests'
+    description: 'Describe driver-request endpoints'
+  - name: 'Driver-schedules'
+    description: 'Describe driver-schedule endpoints'
+  - name: 'Orders'
+    description: 'Describe order endpoints'
+  - name: 'Stop-offs'
+    description: 'Describe stop-off endpoints'
+  - name: 'Trucks'
+    description: 'Describe truck endpoints'
+  - name: 'Truck-models'
+    description: 'Describe truck-model endpoints'
+  - name: 'Truck-sizes'
+    description: 'Describe truck-size endpoints'
+  - name: 'Truck-templates'
+    description: 'Describe truck-template endpoints'
+  - name: 'Truck-types'
+    description: 'Describe truck-type endpoints'

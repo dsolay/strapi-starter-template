@@ -1,0 +1,58 @@
+get:
+  description: 'Retrieve single truck-template'
+  summary: 'Show single truck-template'
+  operationId: 'showTruck-template'
+  tags:
+    - 'Truck-templates'
+  parameters:
+    - $ref: '../common.yaml#/components/parameters/recordId'
+    - $ref: '../common.yaml#/components/parameters/filterParam'
+    - $ref: '../common.yaml#/components/parameters/sortParam'
+    - $ref: '../common.yaml#/components/parameters/paginationParam'
+    - $ref: '../common.yaml#/components/parameters/fieldParam'
+    - $ref: '../common.yaml#/components/parameters/populateParam'
+  responses:
+    '200':
+      $ref: './components.yaml#/components/responses/success'
+    '401':
+      $ref: '../common.yaml#/components/responses/unauthorized'
+    '403':
+      $ref: '../common.yaml#/components/responses/forbidden'
+    default:
+      $ref: '../common.yaml#/components/responses/internalError'
+put:
+  description: 'Update existing truck-template'
+  summary: 'Update truck-template'
+  operationId: 'updateTruck-template'
+  tags:
+    - 'Truck-templates'
+  parameters:
+    - $ref: '../common.yaml#/components/parameters/recordId'
+  requestBody:
+    $ref: './components.yaml#/components/requestBodies/truck-template'
+  responses:
+    '200':
+      $ref: './components.yaml#/components/responses/created'
+    '401':
+      $ref: '../common.yaml#/components/responses/unauthorized'
+    '403':
+      $ref: '../common.yaml#/components/responses/forbidden'
+    default:
+      $ref: '../common.yaml#/components/responses/internalError'
+delete:
+  description: 'Delete existing truck-template'
+  summary: 'Delete truck-template'
+  operationId: 'deleteTruck-template'
+  tags:
+    - 'Truck-templates'
+  parameters:
+    - $ref: '../common.yaml#/components/parameters/recordId'
+  responses:
+    '200':
+      $ref: './components.yaml#/components/responses/created'
+    '401':
+      $ref: '../common.yaml#/components/responses/unauthorized'
+    '403':
+      $ref: '../common.yaml#/components/responses/forbidden'
+    default:
+      $ref: '../common.yaml#/components/responses/internalError'

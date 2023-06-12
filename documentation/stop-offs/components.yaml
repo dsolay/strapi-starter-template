@@ -1,0 +1,61 @@
+components:
+  schemas:
+    Stop-off:
+      type: 'object'
+      properties:
+        step:
+          type: 'integer'
+        location:
+          type: 'object'
+        order:
+          oneOf:
+            - type: 'integer'
+            - type: 'object'
+      required:
+        - 'step'
+        - 'location'
+    FormattedModel:
+      allOf:
+        - type: 'object'
+          properties:
+            id:
+              type: 'number'
+        - $ref: '#/components/schemas/Stop-off'
+        - $ref: '../common.yaml#/components/schemas/CommonFields'
+  requestBodies:
+    stop-off:
+      description: 'stop-off request body'
+      required: true
+      content:
+        application/json:
+          schema:
+            type: 'object'
+            properties:
+              data:
+                $ref: '#/components/schemas/Stop-off'
+  responses:
+    success:
+      description: 'List all stop-off'
+      content:
+        application/json:
+          schema:
+            type: 'object'
+            properties:
+              data:
+                type: 'array'
+                items:
+                  type: 'object'
+                  $ref: '#/components/schemas/FormattedModel'
+              meta:
+                type: 'object'
+                $ref: '../common.yaml#/components/schemas/Pagination'
+    created:
+      description: 'New stop-off created'
+      content:
+        application/json:
+          schema:
+            type: 'object'
+            properties:
+              data:
+                type: 'object'
+                $ref: '#/components/schemas/FormattedModel'

@@ -1,0 +1,54 @@
+components:
+  schemas:
+    Common-rejected-reason:
+      type: 'object'
+      properties:
+        reason:
+          type: 'string'
+      required:
+        - 'reason'
+    FormattedModel:
+      allOf:
+        - type: 'object'
+          properties:
+            id:
+              type: 'number'
+        - $ref: '#/components/schemas/Common-rejected-reason'
+        - $ref: '../common.yaml#/components/schemas/CommonFields'
+  requestBodies:
+    common-rejected-reason:
+      description: 'common-rejected-reason request body'
+      required: true
+      content:
+        application/json:
+          schema:
+            type: 'object'
+            properties:
+              data:
+                $ref: '#/components/schemas/Common-rejected-reason'
+  responses:
+    success:
+      description: 'List all common-rejected-reason'
+      content:
+        application/json:
+          schema:
+            type: 'object'
+            properties:
+              data:
+                type: 'array'
+                items:
+                  type: 'object'
+                  $ref: '#/components/schemas/FormattedModel'
+              meta:
+                type: 'object'
+                $ref: '../common.yaml#/components/schemas/Pagination'
+    created:
+      description: 'New common-rejected-reason created'
+      content:
+        application/json:
+          schema:
+            type: 'object'
+            properties:
+              data:
+                type: 'object'
+                $ref: '#/components/schemas/FormattedModel'

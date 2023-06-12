@@ -1,0 +1,83 @@
+components:
+  schemas:
+    Driver:
+      type: 'object'
+      properties:
+        name:
+          type: 'string'
+        dui:
+          type: 'string'
+        driverLicense:
+          type: 'string'
+        criminalRecordDate:
+          type: 'string'
+          format: 'date'
+        policeSolvencyDate:
+          type: 'string'
+          format: 'date'
+        photo:
+          type: 'integer'
+        driver_schedules:
+          type: 'array'
+          items: &ref_1
+            oneOf:
+              - type: 'integer'
+              - type: 'object'
+        truck:
+          oneOf: &ref_0
+            - type: 'integer'
+            - type: 'object'
+        user:
+          oneOf: *ref_0
+        driverRequests:
+          type: 'array'
+          items: *ref_1
+      required:
+        - 'name'
+        - 'dui'
+        - 'driverLicense'
+    FormattedModel:
+      allOf:
+        - type: 'object'
+          properties:
+            id:
+              type: 'number'
+        - $ref: '#/components/schemas/Driver'
+        - $ref: '../common.yaml#/components/schemas/CommonFields'
+  requestBodies:
+    driver:
+      description: 'driver request body'
+      required: true
+      content:
+        application/json:
+          schema:
+            type: 'object'
+            properties:
+              data:
+                $ref: '#/components/schemas/Driver'
+  responses:
+    success:
+      description: 'List all driver'
+      content:
+        application/json:
+          schema:
+            type: 'object'
+            properties:
+              data:
+                type: 'array'
+                items:
+                  type: 'object'
+                  $ref: '#/components/schemas/FormattedModel'
+              meta:
+                type: 'object'
+                $ref: '../common.yaml#/components/schemas/Pagination'
+    created:
+      description: 'New driver created'
+      content:
+        application/json:
+          schema:
+            type: 'object'
+            properties:
+              data:
+                type: 'object'
+                $ref: '#/components/schemas/FormattedModel'
