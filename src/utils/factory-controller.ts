@@ -73,7 +73,7 @@ export const createRelationControllers = (
         : params[baseId]
 
       try {
-        const service = strapi.service(baseServiceName)
+        const service = strapi.service(baseServiceName) as AnyValue
 
         if (!service) {
           const message = i18n('errors.serviceNotFound')

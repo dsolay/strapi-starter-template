@@ -2,6 +2,7 @@ import { Context, Next } from 'koa'
 import utils from '@strapi/utils'
 import { Strapi } from '@strapi/strapi'
 import camelCase from 'lodash.camelcase'
+import { AnyValue } from '../types'
 import { i18n } from './parse-locales'
 
 const { NotFoundError } = utils.errors
@@ -33,7 +34,7 @@ export const createCompanyOwnerMiddleware = (
       }
 
       const entityId = parameters[`${camelCase(entity)}Id`]
-      const service = strapi.service(uid)
+      const service = strapi.service(uid) as AnyValue
 
       if (!service) {
         const message = i18n('errors.serviceNotFound')
